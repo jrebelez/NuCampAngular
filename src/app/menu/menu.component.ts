@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
 
   dishes: Dish[];
 
-  
+
 
   constructor(private dishService: DishService) { }
 

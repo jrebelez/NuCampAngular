@@ -12,9 +12,9 @@ export class LeaderService {
     return LEADERS;
   }
   getLeader(id: string): Leader {
-     return LEADERS.filter((leader) => Leader.name === id)[0]
+    return LEADERS.filter((leader) => Leader.name === id)[0]
   }
   getFeaturedLeader(): Leader {
-      return LEADERS.filter((leader) => leader.featured)[0];
+    return LEADERS.filter((leader) => leader.featured)[0];
   }
 }
