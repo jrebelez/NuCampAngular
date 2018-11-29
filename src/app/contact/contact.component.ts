@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit {
       'email': {
         'required': 'Email is required.',
         'email': 'Email not in valid format.'
-      }
+      },
     };
 
   constructor(private fb: FormBuilder) { 
@@ -49,7 +49,7 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-createForm(){
+createForm(): void {
   this.feedbackForm = this.fb.group({
     firstname: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
     lastname: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
@@ -74,7 +74,7 @@ onValueChanged(data?: any){
       if (control && control.dirty && !control.valid){
         const messages = this.validationMessages[field];
         for (const key in control.errors){
-          if (control.errors.hasOwnPropert(key)){
+          if (control.errors.hasOwnProperty(key)){
             this.formErrors[field] += messages[key] + ' ';
           }
         }
