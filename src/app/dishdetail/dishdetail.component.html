@@ -13,7 +13,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-button [routerLink]="['/dishdetail',prev]">
-        <span class="fa fa-chevron-left fa-lg"></span>
+          <span class="fa fa-chevron-left fa-lg"></span>
         </button>
         <button mat-button (click)="goBack()">BACK</button>
         <button mat-button>LIKE</button>
@@ -21,11 +21,11 @@
         <span class="flex-spacer"></span>
         <button mat-button [routerLink]="['/dishdetail',next]">
           <span class="fa fa-chevron-right fa-lg"></span>
-          </button>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
-  
+
 
   <div fxFlex="40" *ngIf="dish">
     <mat-list>
@@ -38,10 +38,44 @@
         <p matLine> {{comment.author}} {{comment.date | date}}</p>
 
       </mat-list-item>
-    </mat-list>
+      <mat-list-item *ngIf="commentForm">
+        <p matLine> {{commentForm.value.comment}}</p>
+        <p matLine> {{commentForm.value.rating}} Stars </p>
+        <p matLine> {{commentForm.value.author}} {{commentForm.value.date | date}}</p>
 
+      </mat-list-item>
+    </mat-list>
+    <form novalidate [formGroup]="commentForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field class="full-width">
+        <input matInput formControlName="author" placeholder="Name" type="text">
+        <mat-error *ngIf="formErrors.author">
+          {{formErrors.author}}
+        </mat-error>
+      </mat-form-field>
+       <mat-slider formControlName="rating" class="full-width" thumbLabel tickInterval="1" min="1" max="5"></mat-slider>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="comment" placeholder="Your Comment" type="text">
+        <mat-error *ngIf="formErrors.comment">
+          {{formErrors.comment}}
+        </mat-error>
+      </mat-form-field>
+
+      <button type="submit" mat-button class="background-primary text-floral-white"[disabled]="commentForm.invalid" > Submit</button>
+
+
+
+
+
+    </form>
   </div>
   <div [hidden]="dish">
-      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-    </div>
+    <mat-spinner></mat-spinner>
+    <h4>Loading . . . Please Wait</h4>
+  </div>
+
+  <form Fxflex="40">
+
+
+  </form>
 </div>
