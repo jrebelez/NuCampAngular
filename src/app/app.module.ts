@@ -37,6 +37,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {baseURL} from './shared/baseurl';
+import { throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http'
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +76,7 @@ import {baseURL} from './shared/baseurl';
   ],
   providers: [
     DishService, PromotionService, LeaderService,
+    ProcessHTTPMsgService,
     { provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents: [
