@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut} from '../animations/app.animation';
+import { flyInOut, expand} from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -11,11 +12,13 @@ import { flyInOut} from '../animations/app.animation';
     'style':'display: block;'
      },
      animations:[
-       flyInOut()
+       flyInOut(),expand()
      ]
 })
 export class ContactComponent implements OnInit {
-
+  showForm = true;
+  showSpinner = false;
+  showFeedback = false;
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
@@ -50,7 +53,7 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private feedbackService: FeedbackService, @Inject('BaseURL') private BaseURL) {
     this.createForm();
   }
 
@@ -92,7 +95,7 @@ export class ContactComponent implements OnInit {
   }
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.feedbackService.submitFeedback(this.feedback).subscribe();
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',

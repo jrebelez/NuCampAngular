@@ -41,6 +41,7 @@ import { throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http'
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { HighlightDirective } from './directives/highlight.directive';
+import { FeedbackService } from './services/feedback.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +78,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     HttpClientModule
   ],
   providers: [
-    DishService, PromotionService, LeaderService,
+    DishService, PromotionService, LeaderService,FeedbackService,
     ProcessHTTPMsgService,
     { provide: 'BaseURL', useValue: baseURL}
   ],
